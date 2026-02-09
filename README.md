@@ -15,12 +15,19 @@
 ## 🚀 Guía de Instalación y Ejecución
 
 ### 1. Instalar dependencias
-El proyecto necesita instalar las librerías de Node.js (como Express, bcrypt, jwt). Abra la terminal en la carpeta del proyecto y ejecute:
+Instalar las librerías de Node.js (como Express, bcrypt, jwt). Abrir la terminal en la carpeta del proyecto (api-tareas) y ejecute:
 
 ```bash
 npm install
 ```
 
 ```bash
-npm install express body-parser jsonwebtoken bcryptjs.
+npm install express body-parser jsonwebtoken bcryptjs
+```
+
+---
+
+## Correr el servidor
+```bash
+node server.js
 ```
