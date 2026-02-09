@@ -31,3 +31,8 @@ npm install express body-parser jsonwebtoken bcryptjs
 ```bash
 node server.js
 ```
+
+---
+
+## Entrar a la pagina Login
+Una vez abierta la pagina web del localhost3000, agregar un "/login.html", para poder acceder a la pagina correcta
