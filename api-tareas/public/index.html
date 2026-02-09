@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TOM FORD</title>
+
+    <!-- Archivo CSS donde se da el diseño  -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Librería de iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Barra negra de arriba -->
+    <div class="barraSuperior">
+      <div class="contenidoPromo">
+        <span class="textoIzq">
+          COMPLIMENTARY SAMPLES AND SHIPPING ON EVERY ORDER.
+        </span>
+        <a href="#" class="enlaceDer">
+          TOM FORD FASHION <i class="fa-solid fa-chevron-right"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Encabezado principal -->
+    <header>
+      <div class="barraUtilidades">
+        <div class="contenedorBusqueda">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="SEARCH" />
+        </div>
+
+        <div class="iconosUsuario">
+          <a href="#"><i class="fa-solid fa-location-dot"></i> STORE LOCATOR</a>
+          <a href="#"
+            ><i class="fa-regular fa-user"></i> SIGN IN / CREATE ACCOUNT</a
+          >
+          <a href="#">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="contadorCarrito">0</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Logo y menú de navegación principal -->
+      <div class="cabeceraPrincipal">
+        <div class="logo">TOM FORD</div>
+        <nav>
+          <ul>
+            <!-- Opciones del menú -->
+            <li><a href="#">MOST WANTED</a></li>
+            <li><a href="#">FRAGRANCE</a></li>
+            <li><a href="#">MAKEUP</a></li>
+            <li><a href="#">SKINCARE</a></li>
+            <li><a href="#">GIFTS</a></li>
+            <li><a href="#">ONLINE SERVICES</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Imagen principal  -->
+    <section class="bannerPrincipal">
+      <img
+        src="img/imagen1.PNG"
+        alt="Tom Ford Perfume"
+        class="imgFondoBanner"
+      />
+
+      <div class="contenidoBanner">
+        <h1>SOLEIL NEIGE</h1>
+        <p>The citrus floral scent captures sun on snow.</p>
+        <button class="botonCompra btnAgregar" 
+        data-id="1" 
+        data-nombre="SOLEIL NEIGE" 
+        data-precio="295" 
+        data-imagen="img/imagen1.PNG">
+        ADD TO BAG
+        </button>
+      </div>
+    </section>
+
+    <!-- Segunda sección de la pagina  -->
+    <section class="seccionDividida">
+      <!-- Perfume en la izquierda -->
+      <div class="panelMitad">
+        <img src="img/imagen2.PNG" alt="Figue Erotique" class="imgFondo" />
+        <div class="contenidoPanel">
+          <span class="etiquetaNuevo">NEW</span>
+          <h3>FIGUE ÉROTIQUE</h3>
+          <p>Explore desire. Discover the amber fruity scent.</p>
+          <button class="botonCompraPeque btnAgregar" 
+          data-id="2" 
+          data-nombre="FIGUE ÉROTIQUE" 
+          data-precio="165" 
+          data-imagen="img/imagen2.PNG">
+          ADD TO BAG
+      </button>
+        </div>
+      </div>
+
+      <!-- Perfume en la derecha -->
+      <div class="panelMitad">
+        <img src="img/imagen3.PNG" alt="Cherry Collection" class="imgFondo" />
+        <div class="contenidoPanel">
+          <h3>PRIVATE BLEND CHERRY COLLECTION</h3>
+          <p>Three unique scents inspired by the iconic ingredient.</p>
+          <button class="botonCompraPeque btnAgregar" 
+          data-id="3" 
+          data-nombre="LOST CHERRY" 
+          data-precio="390" 
+          data-imagen="img/imagen3.PNG">
+          ADD TO BAG
+      </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tercera sección de la pagina -->
+    <section class="bannerSecundario">
+      <img
+        src="img/imagen7.PNG"
+        alt="Private Blend"
+        class="imgFondoSecundario"
+      />
+      <div class="contenidoSecundario">
+        <h2>PRIVATE BLEND</h2>
+        <p>Artisanal fragrances from TOM FORD's private scent laboratory.</p>
+        <a href="#" class="botonTransparente">SHOP NOW</a>
+      </div>
+    </section>
+
+    <!-- Cuarta sección de la pagina -->
+    <section class="seccionTriptico">
+      <!-- Perfume izquierda -->
+      <div class="columnaPromo">
+        <img src="img/imagen8.PNG" alt="Makeup" class="imgFondoCol" />
+        <div class="contenidoCol">
+          <h3>MAKEUP</h3>
+          <p>A sumptuous wardrobe of cosmetics.</p>
+          <a href="#" class="botonBorde">SHOP NOW</a>
+        </div>
+      </div>
+
+      <!-- Perfume enmedio -->
+      <div class="columnaPromo">
+        <img src="img/imagen9.PNG" alt="Vanilla Sex" class="imgFondoCol" />
+        <div class="contenidoCol">
+          <h3>VANILLA SEX COLLECTION</h3>
+          <p>Makeup inspired by the award-winning scent.</p>
+          <a href="#" class="botonBorde">SHOP NOW</a>
+        </div>
+      </div>
+
+      <!-- Perfume derecha -->
+      <div class="columnaPromo">
+        <img src="img/imagen10.PNG" alt="Signature" class="imgFondoCol" />
+        <div class="contenidoCol">
+          <h3>SIGNATURE</h3>
+          <p>Modern fragrances with timeless impact.</p>
+          <a href="#" class="botonBorde">SHOP NOW</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seccion WISHLIST -->
+    <section class="seccionRegalos">
+        <div class="contenedorRegalos">
+            <h2 class="tituloRegalos">PRIVATE WISHLIST</h2>
+            <p class="subtituloRegalos">Save your favorite scents for later or plan your gifts.</p>
+
+            <div class="formularioRegalos">
+                <input type="text" id="inputRegalo" placeholder="E.g. Oud Wood..." class="inputElegante">
+                <button id="btnAgregarRegalo" class="btnNegro">SAVE ITEM</button>
+            </div>
+
+            <!-- Aquí se mostrará la lista -->
+            <ul id="listaRegalos" class="listaElegante">
+            </ul>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="piePagina">
+      <div class="contenedorEnlacesPie">
+        <div class="columnaLista">
+          <h4>THE COMPANY</h4>
+          <ul>
+            <li><a href="#">PRIVACY POLICY</a></li>
+            <li><a href="#">CONSUMER HEALTH DATA PRIVACY STATEMENT</a></li>
+            <li><a href="#">TERMS & CONDITIONS</a></li>
+            <li><a href="#">SUPPLIER RELATIONS</a></li>
+            <li><a href="#">SUSTAINABILITY</a></li>
+            <li><a href="#">INGREDIENTS GLOSSARY</a></li>
+            <li><a href="#">ACCESSIBILITY</a></li>
+            <li class="margenArriba">
+              <a href="#">LIMIT USE OF MY SENSITIVE PERSONAL INFORMATION</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="columnaLista">
+          <h4>CUSTOMER SERVICE</h4>
+          <ul>
+            <li><a href="#">TRACK MY ORDER</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">SHIPPING & RETURNS</a></li>
+            <li><a href="#">CONTACT US</a></li>
+            <li><a href="#">FAQS</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Redes sociales -->
+    <div class="barraInferior">
+      <div class="inferiorIzq">
+        <span class="logoPie">TOM FORD</span>
+
+        <div class="redesSociales">
+          <a href="https://www.facebook.com/tomford" target="_blank">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a href="https://www.instagram.com/tomford" target="_blank">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@tomfordbeauty" target="_blank">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a href="https://www.youtube.com/tomford" target="_blank">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="inferiorDer">
+        <span class="enlaceAccesibilidad">
+          ACCESSIBILITY <i class="fa-solid fa-universal-access"></i>
+        </span>
+        <span class="derechosAutor"> 2026 TOM FORD. All rights reserved. </span>
+      </div>
+    </div>
+
+    <!-- PANEL DEL CARRITO -->
+    <div id="fondoOscuro" class="fondoOscuro"></div> 
+    
+    <div id="sidebarCarrito" class="sidebarCarrito">
+        <div class="cabeceraCarrito">
+            <h2>TU BOLSA (<span id="cantidadCarrito">0</span>)</h2>
+            <button id="btnCerrarCarrito" class="btnCerrar"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <div id="itemsCarrito" class="itemsCarrito">
+            <p class="carritoVacio">Tu bolsa está vacía.</p>
+        </div>
+
+        <div class="pieCarrito">
+            <div class="filaTotal">
+                <span>TOTAL</span>
+                <span id="precioTotal">$0.00</span>
+            </div>
+            <button class="botonCheckout">CHECKOUT</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+  </body>
+</html>

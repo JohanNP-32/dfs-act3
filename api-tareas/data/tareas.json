@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1700002,
+    "titulo": "ORD-2026-002",
+    "descripcion": "1 x Oud Wood Parfum\n1 x Beard Oil",
+    "estado": "completada",
+    "creador": "Administrador",
+    "asignado": "Mateo Garcia",
+    "fechaCreacion": "2/8/2026, 10:30:00 AM",
+    "fechaRealizacion": "2/8/2026, 5:34:44 PM"
+  },
+  {
+    "id": 1700003,
+    "titulo": "ORD-2026-003",
+    "descripcion": "2 x Lost Cherry 50ml",
+    "estado": "completada",
+    "creador": "Sistema",
+    "asignado": "Lucas Fernandez",
+    "fechaCreacion": "2/7/2026, 4:15:00 PM",
+    "fechaRealizacion": "2/8/2026, 4:53:22 PM"
+  },
+  {
+    "id": 1700004,
+    "titulo": "ORD-2026-004",
+    "descripcion": "1 x Rose Prick Candle",
+    "estado": "pendiente",
+    "creador": "Sofia Lopez",
+    "asignado": "Sin asignar",
+    "fechaCreacion": "2/8/2026, 1:45:00 PM",
+    "fechaRealizacion": "Pendiente"
+  },
+  {
+    "id": 1700005,
+    "titulo": "ORD-2026-005",
+    "descripcion": "1 x Soleill Blanc Body Oil\n1 x Lip Color #16",
+    "estado": "pendiente",
+    "creador": "Sistema",
+    "asignado": "Lucas Fernandez",
+    "fechaCreacion": "2/8/2026, 3:20:00 PM",
+    "fechaRealizacion": "Pendiente"
+  },
+  {
+    "id": 1770593799412,
+    "titulo": "Orden Prueba",
+    "descripcion": "Perfumen nuevo 3x23",
+    "estado": "completada",
+    "creador": "Administrador",
+    "asignado": "Mateo Garcia",
+    "fechaCreacion": "2/8/2026, 5:36:39 PM",
+    "fechaRealizacion": "2/8/2026, 5:37:05 PM"
+  }
+]

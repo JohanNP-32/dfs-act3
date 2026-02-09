@@ -1,0 +1,26 @@
+[
+  {
+    "username": "admin",
+    "password": "$2b$10$JwN36kRKO4DYDHDob0ZXZ.0tqZBnvuLztO2JvQf3po4oFU8AUCqqq",
+    "nombre": "Administrador",
+    "role": "admin"
+  },
+  {
+    "username": "mateo",
+    "password": "$2b$10$AYHS85qoIgr8l3ksZEhArOQARtubbj.jg1T7Wsp2vv.z/LpXkAwoa",
+    "nombre": "Mateo Garcia",
+    "role": "employee"
+  },
+  {
+    "username": "valeria",
+    "password": "$2b$10$uc3h87SlOEyBjgHNYRCe3.jPYzI9S9rca1lMJNaUF0hKswJiP5TLO",
+    "nombre": "Valeria Diaz",
+    "role": "employee"
+  },
+  {
+    "username": "lucas",
+    "password": "$2b$10$.3QZfGIWeurIftkQnznIpuzYicXZxJVtGoGGU5eT2AuQ7pcW7VVkW",
+    "nombre": "Lucas Fernandez",
+    "role": "employee"
+  }
+]

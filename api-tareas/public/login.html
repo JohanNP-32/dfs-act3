@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tom Ford - Admin Login</title>
+    <link rel="stylesheet" href="admin.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body class="login-body">
+    <div class="login-box">
+      <h2>
+        TOM FORD <br /><span
+          style="font-size: 12px; color: #666; font-weight: normal"
+          >INTERNAL SYSTEM</span
+        >
+      </h2>
+
+      <form id="authForm">
+        <input type="text" id="username" placeholder="Username" required />
+        <input type="password" id="password" placeholder="Password" required />
+
+        <input
+          type="text"
+          id="fullname"
+          placeholder="Full Name (Register only)"
+          style="display: none"
+        />
+
+        <button type="submit" id="btnSubmit">LOG IN</button>
+
+        <p
+          style="
+            font-size: 11px;
+            margin-top: 15px;
+            cursor: pointer;
+            text-decoration: underline;
+          "
+          id="toggleMode"
+        >
+          No account? Register here
+        </p>
+
+        <p id="msg" class="error" style="color: red; display: none"></p>
+        <p
+          id="successMsg"
+          style="color: green; font-size: 12px; display: none; margin-top: 10px"
+        ></p>
+      </form>
+    </div>
+
+    <script>
+      let isLogin = true;
+      const form = document.getElementById("authForm");
+      const toggleBtn = document.getElementById("toggleMode");
+      const nameInput = document.getElementById("fullname");
+      const btnSubmit = document.getElementById("btnSubmit");
+      const msg = document.getElementById("msg");
+      const successMsg = document.getElementById("successMsg");
+
+      // Login y Registro
+      toggleBtn.addEventListener("click", () => {
+        isLogin = !isLogin;
+        if (isLogin) {
+          nameInput.style.display = "none";
+          btnSubmit.innerText = "LOG IN";
+          toggleBtn.innerText = "No account? Register here";
+        } else {
+          nameInput.style.display = "block";
+          btnSubmit.innerText = "REGISTER";
+          toggleBtn.innerText = "Have an account? Log in";
+        }
+        msg.style.display = "none";
+        successMsg.style.display = "none";
+      });
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+        const nombre = document.getElementById("fullname").value;
+
+        const endpoint = isLogin ? "/login" : "/register";
+        const body = isLogin
+          ? { username, password }
+          : {
+              username,
+              password,
+              nombre,
+              role: username === "admin" ? "admin" : "employee",
+            };
+
+        try {
+          const res = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body),
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            if (isLogin) {
+              localStorage.setItem("token", data.token);
+              localStorage.setItem("role", data.role);
+              localStorage.setItem("nombreUsuario", data.nombre);
+              window.location.href = "dashboard.html";
+            } else {
+              successMsg.innerText = "Registered! Now please log in.";
+              successMsg.style.display = "block";
+              msg.style.display = "none";
+              setTimeout(() => toggleBtn.click(), 1500);
+            }
+          } else {
+            msg.innerText = data.message;
+            msg.style.display = "block";
+            successMsg.style.display = "none";
+          }
+        } catch (error) {
+          msg.innerText = "Connection error";
+          msg.style.display = "block";
+        }
+      });
+    </script>
+  </body>
+</html>

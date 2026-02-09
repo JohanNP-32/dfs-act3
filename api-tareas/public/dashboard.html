@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Order Management - Tom Ford</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="admin.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="navbar">
+      <div class="brand">TOM FORD ADMIN</div>
+      <div class="user-info">
+        <span id="userDisplay">Cargando...</span>
+        <span class="logout-btn" onclick="logout()">LOGOUT</span>
+      </div>
+    </div>
+
+    <div class="header">
+      <h1>ORDER MANAGEMENT</h1>
+    </div>
+
+    <div class="controls">
+      <div class="filters">
+        <button class="filter-btn active" onclick="filtrar('todas', this)">
+          All Orders
+        </button>
+        <button class="filter-btn" onclick="filtrar('pendiente', this)">
+          Pending
+        </button>
+        <button class="filter-btn" onclick="filtrar('completada', this)">
+          Completed
+        </button>
+      </div>
+      <button class="btn-black" onclick="abrirModalCrear()">+ NEW ORDER</button>
+    </div>
+
+    <div class="grid-orders" id="ordersContainer"></div>
+
+    <div id="modalForm" class="modal">
+      <div class="modal-content">
+        <h2 id="modalTitle">New Order</h2>
+        <input type="hidden" id="editId" />
+
+        <div class="form-group">
+          <label>Order ID / Title</label>
+          <input type="text" id="inputTitulo" placeholder="e.g. ORD-2026-00X" />
+        </div>
+
+        <div class="form-group">
+          <label>Products / Description</label>
+          <textarea
+            id="inputDesc"
+            rows="3"
+            placeholder="List of products..."
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Assign To</label>
+          <select id="selectAsignado">
+            <option value="Sin asignar">Sin asignar</option>
+          </select>
+        </div>
+
+        <div class="form-group" id="groupEstado">
+          <label>Status</label>
+          <select id="selectEstado">
+            <option value="pendiente">Pendiente</option>
+            <option value="en proceso">En Proceso</option>
+            <option value="completada">Completada</option>
+          </select>
+        </div>
+
+        <div class="modal-actions">
+          <button class="btn-black" onclick="guardarCambios()" style="flex: 1">
+            SAVE
+          </button>
+          <button class="btn-cancel-modal" onclick="cerrarModal()">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="modalConfirm" class="modal">
+      <div class="modal-content" style="width: 300px; text-align: center">
+        <h2 style="margin-bottom: 15px">Delete Order?</h2>
+        <p style="font-size: 13px; color: #666; margin-bottom: 25px">
+          This action cannot be undone. Are you sure you want to permanently
+          delete this order?
+        </p>
+        <div class="modal-actions">
+          <button
+            class="btn-black"
+            onclick="confirmarEliminacion()"
+            style="flex: 1; background: #d93025"
+          >
+            DELETE
+          </button>
+          <button class="btn-cancel-modal" onclick="cerrarModalConfirmacion()">
+            CANCEL
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const API_URL = "";
+      let todasLasTareas = [];
+      let modoEdicion = false;
+      let idTareaAEliminar = null;
+
+      const usuarioActual = localStorage.getItem("nombreUsuario") || "Anonimo";
+      const rolUsuario = localStorage.getItem("role");
+      const token = localStorage.getItem("token");
+
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!token) {
+          window.location.href = "login.html";
+          return;
+        }
+
+        document.getElementById("userDisplay").innerText = usuarioActual;
+
+        cargarEmpleados();
+        cargarTareas();
+      });
+
+      function manejarErrorAuth(res) {
+        if (res.status === 401 || res.status === 403) {
+          alert("Sesión expirada. Por favor inicia sesión nuevamente.");
+          logout();
+          return true;
+        }
+        return false;
+      }
+
+      async function cargarEmpleados() {
+        try {
+          const res = await fetch(`${API_URL}/usuarios`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (manejarErrorAuth(res)) return;
+
+          const usuarios = await res.json();
+          const select = document.getElementById("selectAsignado");
+
+          select.innerHTML = '<option value="Sin asignar">Sin asignar</option>';
+
+          usuarios.forEach((u) => {
+            const opt = document.createElement("option");
+            opt.value = u.nombre;
+            opt.innerText = u.nombre;
+            select.appendChild(opt);
+          });
+        } catch (error) {
+          console.error("Error cargando empleados:", error);
+        }
+      }
+
+      async function cargarTareas() {
+        try {
+          const res = await fetch(`${API_URL}/tareas`, {
+            headers: { Authorization: `Bearer ${token}` },
+          });
+
+          if (manejarErrorAuth(res)) return;
+
+          todasLasTareas = await res.json();
+          renderizarTareas(todasLasTareas);
+        } catch (error) {
+          console.error("Error cargando tareas:", error);
+        }
+      }
+
+      function renderizarTareas(lista) {
+        const container = document.getElementById("ordersContainer");
+        container.innerHTML = "";
+
+        if (lista.length === 0) {
+          container.innerHTML =
+            '<p style="grid-column: 1/-1; text-align:center; color:#999;">No hay órdenes disponibles.</p>';
+          return;
+        }
+
+        lista.forEach((t) => {
+          const claseBadge = t.estado.replace(" ", "_");
+
+          // Solo admin ve el botón DELETE
+          let btnDeleteHTML = "";
+          if (rolUsuario === "admin") {
+            btnDeleteHTML = `<button class="btn-action btn-delete" style="display:block" onclick="abrirModalEliminar(${t.id})">DELETE</button>`;
+          }
+
+          const card = `
+                <div class="card">
+                    <div>
+                        <div class="card-header">
+                            <span class="order-id">${t.titulo}</span>
+                            <span class="badge ${claseBadge}">${t.estado}</span>
+                        </div>
+                        <div class="order-date">Created: ${t.fechaCreacion}</div>
+                        
+                        <div class="details-grid">
+                            <div class="detail-item"><strong>Created By:</strong> ${t.creador}</div>
+                            <div class="detail-item"><strong>Assigned To:</strong> ${t.asignado}</div>
+                            <div class="detail-item" style="grid-column: span 2;">
+                                <strong>Completed Date:</strong> ${t.fechaRealizacion || "-"}
+                            </div>
+                        </div>
+
+                        <div class="items-list">${t.descripcion}</div>
+                    </div>
+
+                    <div class="actions">
+                        <button class="btn-action btn-edit" onclick="prepararEdicion(${t.id})">EDIT ORDER</button>
+                        ${btnDeleteHTML}
+                    </div>
+                </div>`;
+          container.innerHTML += card;
+        });
+      }
+
+      function abrirModalCrear() {
+        modoEdicion = false;
+        document.getElementById("modalTitle").innerText = "New Order";
+
+        document.getElementById("inputTitulo").disabled = false;
+        document.getElementById("inputDesc").disabled = false;
+        document.getElementById("selectAsignado").disabled = false;
+
+        document.getElementById("inputTitulo").value = "";
+        document.getElementById("inputDesc").value = "";
+        document.getElementById("selectAsignado").value = "Sin asignar";
+        document.getElementById("groupEstado").style.display = "none";
+
+        document.getElementById("modalForm").style.display = "flex";
+      }
+
+      function prepararEdicion(id) {
+        modoEdicion = true;
+        const tarea = todasLasTareas.find((t) => t.id === id);
+
+        document.getElementById("modalTitle").innerText = "Edit Order";
+        document.getElementById("editId").value = id;
+        document.getElementById("inputTitulo").value = tarea.titulo;
+        document.getElementById("inputDesc").value = tarea.descripcion;
+        document.getElementById("selectAsignado").value = tarea.asignado;
+        document.getElementById("selectEstado").value = tarea.estado;
+        document.getElementById("groupEstado").style.display = "block";
+
+        if (rolUsuario === "admin") {
+          document.getElementById("inputTitulo").disabled = false;
+          document.getElementById("inputDesc").disabled = false;
+          document.getElementById("selectAsignado").disabled = false;
+        } else {
+          document.getElementById("inputTitulo").disabled = true;
+          document.getElementById("inputDesc").disabled = true;
+          document.getElementById("selectAsignado").disabled = true;
+        }
+
+        document.getElementById("modalForm").style.display = "flex";
+      }
+
+      function cerrarModal() {
+        document.getElementById("modalForm").style.display = "none";
+      }
+
+      async function guardarCambios() {
+        const titulo = document.getElementById("inputTitulo").value;
+        const descripcion = document.getElementById("inputDesc").value;
+        const asignado = document.getElementById("selectAsignado").value;
+        const estado = document.getElementById("selectEstado").value;
+
+        if (!titulo || !descripcion) return alert("Please fill fields");
+
+        const headers = {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        };
+
+        try {
+          if (modoEdicion) {
+            const id = document.getElementById("editId").value;
+            const body = { estado };
+
+            if (rolUsuario === "admin") {
+              body.titulo = titulo;
+              body.descripcion = descripcion;
+              body.asignado = asignado;
+            }
+
+            const res = await fetch(`${API_URL}/tareas/${id}`, {
+              method: "PUT",
+              headers: headers,
+              body: JSON.stringify(body),
+            });
+            if (manejarErrorAuth(res)) return;
+          } else {
+            const res = await fetch(`${API_URL}/tareas`, {
+              method: "POST",
+              headers: headers,
+              body: JSON.stringify({
+                titulo,
+                descripcion,
+                asignado,
+              }),
+            });
+            if (manejarErrorAuth(res)) return;
+          }
+
+          cerrarModal();
+          cargarTareas();
+        } catch (error) {
+          console.error("Error guardando:", error);
+          alert("Error de conexión");
+        }
+      }
+
+      function abrirModalEliminar(id) {
+        idTareaAEliminar = id;
+        document.getElementById("modalConfirm").style.display = "flex";
+      }
+
+      function cerrarModalConfirmacion() {
+        document.getElementById("modalConfirm").style.display = "none";
+        idTareaAEliminar = null;
+      }
+
+      async function confirmarEliminacion() {
+        if (idTareaAEliminar === null) return;
+
+        try {
+          const res = await fetch(`${API_URL}/tareas/${idTareaAEliminar}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          });
+
+          if (manejarErrorAuth(res)) return;
+
+          if (res.ok) {
+            cargarTareas();
+          } else {
+            const errorData = await res.json();
+            alert("Error: " + errorData.message);
+          }
+        } catch (error) {
+          console.error("Error eliminando:", error);
+        }
+        cerrarModalConfirmacion();
+      }
+
+      function filtrar(tipo, btn) {
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        if (tipo === "todas") renderizarTareas(todasLasTareas);
+        else renderizarTareas(todasLasTareas.filter((t) => t.estado === tipo));
+      }
+
+      function logout() {
+        localStorage.clear();
+        window.location.href = "login.html";
+      }
+    </script>
+  </body>
+</html>

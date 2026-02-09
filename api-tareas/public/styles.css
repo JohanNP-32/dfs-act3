@@ -1,0 +1,680 @@
+ 
+/* COLORES Y CONFIGURACIÓN BÁSICA */
+
+:root {
+    /* colores para usarlos en todo el sitio */
+    --color-negro: #000;
+    --color-blanco: #fff;
+    --color-gris-oscuro: #383838;
+    --color-gris-claro: #f4f4f4;
+    --fuente-base: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: var(--fuente-base); 
+}
+
+
+body { 
+    background-color: var(--color-blanco); 
+    overflow-x: hidden; 
+}
+
+
+a { 
+    text-decoration: none; 
+    color: inherit; 
+    transition: color 0.3s; 
+}
+
+
+img { 
+    display: block; 
+    max-width: 100%; 
+}
+
+
+ul { 
+    list-style: none; 
+}
+
+
+/* MENÚ Y ENCABEZADO */
+.barraSuperior {
+    background-color: var(--color-gris-oscuro);
+    color: var(--color-blanco);
+    padding: 12px 40px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+
+header {
+    padding: 20px 40px 10px;
+    background: var(--color-blanco);
+    position: sticky; top: 0; z-index: 1000;
+    border-bottom: 1px solid #f2f2f2;
+}
+
+
+.barraUtilidades { 
+    display: flex; 
+    justify-content: flex-end; 
+    margin-bottom: 5px; 
+}
+
+
+.contenedorBusqueda {
+    display: flex; 
+    align-items: center; 
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px; 
+    margin-right: 35px; 
+    width: 200px;
+}
+
+
+.contenedorBusqueda input { 
+    border: none; 
+    outline: none; 
+    width: 100%; 
+    font-size: 11px; 
+    text-transform: uppercase; 
+}
+
+
+.iconosUsuario a { 
+    font-size: 11px; 
+    margin-left: 25px; 
+}
+
+
+.iconosUsuario i { 
+    margin-right: 5px; 
+    font-size: 14px; 
+}
+
+
+/* LOGO TOM FORD */
+.cabeceraPrincipal { 
+    display: flex; 
+    align-items: baseline; 
+    margin-top: -5px; 
+    flex-wrap: wrap; 
+}
+
+
+.logo { 
+    font-size: 46px; 
+    font-weight: 900; 
+    letter-spacing: -2px; 
+    margin-right: 60px; 
+    cursor: pointer; 
+}
+
+
+nav ul li { 
+    margin-right: 25px; 
+    display: inline-block; 
+}
+
+
+nav ul li a { 
+    font-size: 14px; 
+    font-weight: 500; 
+    color: #555; 
+}
+
+
+nav ul li a:hover { 
+    color: var(--color-negro); 
+}
+
+
+/* FOTOS DE FONDO Y BANNERS */
+/* Imagenes de fondo */
+.bannerPrincipal, .bannerSecundario, .panelMitad, .columnaPromo {
+    position: relative; 
+    overflow: hidden; 
+    display: flex; 
+    align-items: flex-end;
+}
+
+
+/* Hace que las imágenes cubran todo el espacio */
+.imgFondoBanner, .imgFondo, .imgFondoSecundario, .imgFondoCol {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    z-index: 0;
+}
+
+/* Alturas de cada sección */
+.bannerPrincipal { 
+    width: 100%; 
+    height: 80vh; 
+}
+
+
+.seccionDividida { 
+    width: 100%; 
+    height: 85vh; 
+    display: flex; 
+}
+
+
+.panelMitad { 
+    width: 50%; 
+    height: 100%;
+}
+
+
+.bannerSecundario { 
+    width: 100%; 
+    height: 70vh; 
+}
+
+
+.seccionTriptico { 
+    width: 100%; 
+    height: 500px; 
+    display: flex; 
+}
+
+
+.columnaPromo { 
+    flex: 1; 
+}
+
+
+.columnaPromo:hover .imgFondoCol { 
+    transform: scale(1.05); 
+    transition: transform 0.5s ease; /* Efecto zoom */
+}
+
+
+/* Textos de las imagenes */
+.contenidoBanner, .contenidoPanel, .contenidoSecundario, .contenidoCol {
+    position: relative; 
+    z-index: 1; 
+    color: var(--color-blanco);
+    padding: 0 0 50px 50px;
+    max-width: 600px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+}
+
+
+.contenidoBanner h1, .contenidoSecundario h2 { 
+    font-size: 48px; 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+}
+
+
+.contenidoSecundario h2 { 
+    font-size: 32px; 
+}
+
+
+.contenidoPanel h3, .contenidoCol h3 { 
+    font-size: 28px; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+}
+
+
+p { 
+    font-size: 13px; 
+    font-weight: 300; 
+    margin-bottom: 25px; 
+}
+
+
+
+/* BOTONES */
+/* Estilo general para todos los botones */
+.botonCompra, .botonCompraPeque, .botonTransparente, .botonBorde, .botonAgregar {
+    display: inline-block;
+    border: 1px solid var(--color-blanco);
+    color: var(--color-blanco);
+    padding: 12px 35px;
+    font-size: 11px;
+    font-weight: 700;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Al pasar el mouse se pone blanco */
+.botonCompra:hover, .botonCompraPeque:hover, .botonTransparente:hover, .botonBorde:hover, .botonAgregar:hover {
+    background-color: var(--color-blanco);
+    color: var(--color-negro);
+}
+
+/* Botón negro sólido para la wishlist */
+.btnNegro {
+    background-color: 
+    var(--color-negro); 
+    border: none; 
+    color: var(--color-blanco);
+    padding: 15px 25px; 
+    font-size: 11px; 
+    font-weight: 700; 
+    cursor: pointer;
+}
+
+
+.btnNegro:hover { 
+    background-color: #333; 
+}
+
+
+/* LISTA DE DESEOS Y PIE DE PÁGINA */
+/* WISHLIST  */
+.seccionRegalos { 
+    background: #f9f9f9; 
+    padding: 60px 20px; 
+    display: flex; 
+    justify-content: center; 
+}
+
+
+.contenedorRegalos { 
+    width: 100%; 
+    max-width: 600px; 
+    text-align: center; 
+}
+
+
+.tituloRegalos { 
+    font-size: 24px; 
+    font-weight: 700; 
+    margin-bottom: 10px; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+}
+
+
+.subtituloRegalos { 
+    font-size: 13px; 
+    color: #666; 
+    margin-bottom: 40px; 
+}
+
+
+.formularioRegalos { 
+    display: flex; 
+    gap: 10px; 
+    flex-wrap: wrap; 
+    margin: 20px 0; 
+}
+
+
+.inputElegante { 
+    padding: 15px; 
+    border: 1px solid #ccc; 
+    flex: 1; 
+    outline: none; 
+}
+
+
+.listaElegante { 
+    list-style: none; 
+    text-align: left; 
+}
+
+
+.itemRegalo { 
+    padding: 12px 0; 
+    border-bottom: 1px solid #eee; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+
+
+.textoRegalo { 
+    font-size: 12px; 
+    font-family: var(--fuente-base); 
+    text-transform: none; 
+    letter-spacing: 1px; 
+    color: #333; 
+}
+
+
+.itemRegalo input {
+    font-size: 12px;
+    font-family: var(--fuente-base);
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none; 
+    padding: 2px 0;
+    width: 70%;
+    background: transparent;
+    text-transform: none;
+}
+
+
+.iconoAccion { 
+    cursor: pointer; 
+    margin-left: 10px; 
+    color: #999; 
+}
+
+
+.iconoAccion:hover { 
+    color: black; 
+}
+
+
+.inputEdicion { 
+    width: 70%; 
+    padding: 5px; 
+}
+
+
+.iconoEditar, .iconoBorrar { 
+    color: #b0b0b0; 
+    font-size: 13px;
+    cursor: pointer; 
+    margin-left: 15px;
+    transition: color 0.3s;
+}
+
+
+.iconoEditar:hover, .iconoBorrar:hover { 
+    color: #000; 
+}
+
+/* FOOTER */
+.piePagina { 
+    padding: 60px 20px; 
+    background-color: white;
+}
+
+
+.contenedorEnlacesPie { 
+    display: flex; 
+    justify-content: center; 
+    gap: 100px; 
+}
+
+
+.columnaLista { 
+    text-align: left; 
+}
+
+
+.columnaLista h4 { 
+    font-size: 11px; 
+    font-weight: 700; 
+    margin-bottom: 20px; 
+}
+
+
+.columnaLista ul li { 
+    font-size: 10px; 
+    color: #666; 
+    margin-bottom: 12px; 
+}
+
+
+.barraInferior {
+    border-top: 1px solid #eee; 
+    padding: 25px 40px; 
+    display: flex; 
+    justify-content: space-between; 
+    font-size: 10px;
+}
+
+
+.redesSociales a { 
+    margin-right: 15px; 
+    font-size: 14px; 
+}
+
+
+/* CARRITO DE COMPRAS */
+.fondoOscuro { 
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.5); 
+    z-index: 2000; 
+    display: none; 
+}
+
+
+.fondoOscuro.activo { 
+    display: block; 
+}
+
+
+.sidebarCarrito {
+    position: fixed; 
+    top: 0; 
+    right: -100%; 
+    width: 400px; 
+    max-width: 85%;
+    height: 100%;
+    background: white; 
+    z-index: 3000; 
+    display: flex; 
+    flex-direction: column; 
+    transition: right 0.4s ease;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.2); 
+}
+
+
+.sidebarCarrito.activo { 
+    right: 0; 
+}
+
+
+.cabeceraCarrito, .pieCarrito { padding: 20px; 
+    border-bottom: 1px solid #eee; 
+}
+
+
+.itemsCarrito { flex: 1; 
+    overflow-y: auto; 
+    padding: 20px; 
+}
+
+
+.itemCarrito { display: flex; 
+    gap: 15px; 
+    margin-bottom: 20px; 
+}
+
+
+.imgItemCarrito { width: 70px; 
+    height: 70px; 
+    object-fit: cover; 
+}
+
+
+.botonCheckout { 
+    width: 100%; 
+    background: black; 
+    color: white; 
+    padding: 15px; 
+    border: none; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+
+.selectTamano {
+    border: 1px solid #ccc;
+    background: white;
+    padding: 5px;
+    font-size: 11px;
+    margin-top: 5px;
+    display: block;
+    width: 80px;
+}
+
+
+.btnEliminar {
+    background: none;
+    border: none;
+    text-decoration: underline;
+    font-size: 10px;
+    margin-top: 10px;
+    cursor: pointer;
+    padding: 0;
+}
+
+
+/* DISEÑO RESPONSIVO  */
+/* AJUSTES PARA CELULAR */
+@media (max-width: 768px) {
+    .barraSuperior, .barraUtilidades, .flechaNav { 
+        display: none; 
+    }
+    
+    .cabeceraPrincipal { 
+        flex-direction: column; 
+        align-items: center; 
+        margin-top: 0; 
+        padding-bottom: 10px;
+    }
+    
+    .logo { 
+        font-size: 32px; 
+        margin: 0 0 10px 0; 
+    }
+
+    nav ul { 
+        justify-content: center; 
+        gap: 15px; 
+        padding: 0 10px;
+    }
+    nav ul li { 
+        margin: 0; 
+    }
+
+    nav ul li a { 
+        font-size: 11px; 
+    } 
+
+    .seccionDividida, .seccionTriptico, .contenedorEnlacesPie, .barraInferior, .formularioRegalos { 
+        flex-direction: column; 
+    }
+
+    .bannerPrincipal { 
+        height: 70vh; 
+    }
+
+    .panelMitad { 
+        width: 100%; 
+        height: 60vh; 
+    } 
+
+    .bannerSecundario { 
+        height: 50vh; 
+    }
+
+    .columnaPromo { 
+        width: 100%; 
+        height: 400px; 
+    }
+
+    .contenidoBanner, .contenidoPanel, .contenidoSecundario, .contenidoCol { 
+        padding: 0 0 30px 20px; 
+        text-align: left;       
+        width: 100%;
+        max-width: 70%;         
+    }
+
+    .contenidoBanner h1 { 
+        font-size: 28px; 
+        line-height: 1.1; 
+        margin-bottom: 5px; 
+    }
+
+    .contenidoPanel h3 { 
+        font-size: 20px; 
+        line-height: 1.1; 
+        margin-bottom: 5px; 
+    }
+
+    .contenidoSecundario h2 { 
+        font-size: 24px; 
+        margin-bottom: 5px; 
+    }
+
+    .contenidoCol h3 { 
+        font-size: 20px; 
+        margin-bottom: 5px; 
+    }
+
+    .contenidoBanner p, .contenidoPanel p, .contenidoSecundario p, .contenidoCol p {
+        font-size: 11px; 
+        margin-bottom: 15px;
+        display: none; 
+    }
+
+    .botonCompra, .botonCompraPeque, .botonTransparente, .botonBorde, .botonAgregar {
+        width: auto; 
+        padding: 10px 20px;
+        font-size: 10px;
+        background: rgba(0,0,0,0.4); 
+    }
+
+    /* WISHLIST Y FOOTER */
+    .seccionRegalos { 
+        padding: 40px 20px; 
+    }
+
+    .contenedorRegalos { 
+        width: 100%; 
+    }
+
+    .formularioRegalos { 
+        flex-direction: column; 
+    }
+
+    .btnNegro { 
+        width: 100%; 
+        margin-top: 10px; 
+    }
+
+    .piePagina { 
+        padding: 40px 20px; 
+        text-align: left; 
+    }
+
+    .contenedorEnlacesPie { 
+        align-items: flex-start; 
+        gap: 30px; 
+    }
+    
+    .barraInferior { 
+        flex-direction: column; 
+        gap: 20px; 
+        text-align: center; 
+    }
+
+    .inferiorIzq, .inferiorDer { 
+        flex-direction: column; 
+        gap: 10px; 
+    }
+
+    /* Carrito */
+    .sidebarCarrito { 
+        width: 100%; 
+        right: -100%; 
+    }
+}
