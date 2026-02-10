@@ -18,6 +18,10 @@
 Instalar las librerías de Node.js (como Express, bcrypt, jwt). Abrir la terminal en la carpeta del proyecto (api-tareas) y ejecute:
 
 ```bash
+cd api-tareas
+```
+
+```bash
 npm install
 ```
 
