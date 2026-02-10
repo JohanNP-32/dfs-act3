@@ -25,6 +25,10 @@ npm install
 npm install express body-parser jsonwebtoken bcryptjs
 ```
 
+```bash
+npm install cors
+```
+
 ---
 
 ## Correr el servidor
